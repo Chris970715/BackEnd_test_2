@@ -6,7 +6,9 @@ export const getAllTour = async (req, res) => {
     try {
 
         const features = new APIFeatures(Tour.find(), req.query)
-            .filter();
+            .filter()
+            .sort()
+            .limitFields();
 
 
         const tour = await features.query;

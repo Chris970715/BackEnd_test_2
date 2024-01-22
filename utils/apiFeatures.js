@@ -1,3 +1,5 @@
+
+
 class APIFeatures {
     constructor(query, queryString){
         this.query = query,
@@ -17,6 +19,29 @@ class APIFeatures {
 
         return this;
     }
+
+    sort() {
+        if(this.queryString.sort){
+            const sortBy = this.queryString.sort.split(',').join(' ');
+            this.query = this.query.sort(sortBy);
+        }else {
+            this.query = this.query.sort('-createdAt');
+        }
+
+        return this;
+    }
+
+    limitFields() {
+        if(this.queryString.fields) {
+            const sortBy = this.queryString.fields.split(',').join(' ');
+            this.query = this.query.select(sortBy);
+        }else {
+            this.query = this.query.select('-__v');
+        }
+
+        return this;
+    }
+
 
 }
 
