@@ -1,6 +1,11 @@
 import Tour from "../models/tourModel.js";
 import APIFeatures from '../utils/apiFeatures.js';
 
+export const aliasTopTours = (req, res) => {
+    req.query.limit = 5;
+    req.query.sort = '-price,ratingsAverage,ratingsQuantity';
+    req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
+}
 
 export const getAllTour = async (req, res) => {
     try {
@@ -8,7 +13,8 @@ export const getAllTour = async (req, res) => {
         const features = new APIFeatures(Tour.find(), req.query)
             .filter()
             .sort()
-            .limitFields();
+            .limitFields()
+            .pagination();
 
 
         const tour = await features.query;
