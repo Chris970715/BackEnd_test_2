@@ -1,10 +1,12 @@
 import Tour from "../models/tourModel.js";
 import APIFeatures from '../utils/apiFeatures.js';
 
-export const aliasTopTours = (req, res) => {
+export const aliasTopTours = (req, res, next) => {
     req.query.limit = 5;
     req.query.sort = '-price,ratingsAverage,ratingsQuantity';
     req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
+
+    next();
 }
 
 export const getAllTour = async (req, res) => {
